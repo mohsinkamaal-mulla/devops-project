@@ -22,7 +22,6 @@ pipeline {
         stage('Build docker image') {
            steps {
                script {   
-		 docker login -u foradoprep
                  def customImage = docker.build('devops-project/petclinic', "./docker")
                  docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
                  customImage.push("${env.BUILD_NUMBER}")
