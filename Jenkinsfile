@@ -22,8 +22,9 @@ pipeline {
         stage('Build docker image') {
            steps {
                script {
+		 docker logout
 		 docker login -u 'foradoprep' -p '@uthor1seD'
-                 def customImage = docker.build("firstimage", "./docker")
+                 def customImage = docker.build("foradoprep/firstimage", "./docker")
                  docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
                  customImage.push("${env.BUILD_ID}")
                  }                     
