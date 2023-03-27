@@ -24,7 +24,6 @@ pipeline {
                script {   
                  def customImage = docker.build('devops-project/petclinic', "./docker")
                  docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-		 customImage.tag("latest")
                  customImage.push("${env.BUILD_NUMBER}")
                  }                     
            }
