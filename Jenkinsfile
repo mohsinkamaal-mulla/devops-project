@@ -21,12 +21,10 @@ pipeline {
          
         stage('Build docker image') {
            steps {
-               script {
-		 docker logout
-		 docker login -u 'foradoprep' -p '@uthor1seD'
-                 def customImage = docker.build("foradoprep/firstimage", "./docker")
+               script {         
+                 def customImage = docker.build('mohsinkamaal-mulla/petclinic', "./docker")
                  docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-                 customImage.push("${env.BUILD_ID}")
+                 customImage.push("${env.BUILD_NUMBER}")
                  }                     
            }
         }
